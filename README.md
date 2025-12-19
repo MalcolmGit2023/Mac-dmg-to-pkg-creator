@@ -1,3 +1,58 @@
+# DMG to PKG Converter for macOS
+
+A simple Bash script to **convert DMG installers into PKG packages** for macOS deployment tools like **Jamf Pro** or **Munki**.
+
+## Features
+
+*   Mounts DMG using `hdiutil`.
+*   Detects:
+    *   Embedded **.pkg/.mpkg** → copies or re-signs.
+    *   **.app bundles** → builds a component PKG with `pkgbuild`.
+    *   Payload folders (e.g., `/Applications`, `/Library`) → builds a root PKG.
+*   Optional **code signing** with Developer ID Installer certificate.
+*   Cleans up temporary mounts automatically.
+
+## Usage
+
+```bash
+sudo ./dmg_to_pkg.sh <input_dmg> <identifier> <version> <output_pkg> [--sign "Developer ID Installer: Your Name (TEAMID)"]
+```
+
+### Examples
+
+```bash
+# Convert DMG with .app inside to PKG
+sudo ./dmg_to_pkg.sh "/tmp/MyApp.dmg" "com.example.myapp" "1.0.0" "/tmp/MyApp.pkg"
+
+# Convert DMG and sign PKG
+sudo ./dmg_to_pkg.sh "/tmp/MyApp.dmg" "com.example.myapp" "1.0.0" "/tmp/MyApp.pkg" --sign "Developer ID Installer: ACME Inc (ABCDE12345)"
+```
+
+## Requirements
+
+*   macOS with **Xcode Command Line Tools** installed.
+*   For signing: valid **Developer ID Installer** certificate in your keychain.
+
+## Notes
+
+*   Test PKG before deployment:
+    ```bash
+    sudo installer -pkg /path/to/pkg -target /
+    ```
+*   Verify signature:
+    ```bash
+    pkgutil --check-signature /path/to/pkg
+    ```
+
+## License
+
+MIT License – free to use and modify.
+
+***
+
+Would you like me to **also include a section for Jamf Pro integration** (how to upload and deploy the generated PKG) in this README? Or keep it minimal for general use?
+
+
 Below is a **general, unbranded** Bash script you can use to **transform a DMG into an installable PKG** on macOS. It handles common cases:
 
 *   DMG contains a **.pkg/.mpkg** → wraps/renames or copies directly to output
