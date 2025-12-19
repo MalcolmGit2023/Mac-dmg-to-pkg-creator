@@ -5,8 +5,6 @@ Below is a **general, unbranded** Bash script you can use to **transform a DMG i
 *   DMG contains a **payload folder** (e.g., `Applications/...` files) → builds a PKG from a root directory
 *   Optional: **sign** the PKG if you have a Developer ID Installer certificate
 
-> Note: You previously experimented with `hdiutil` for installer DMGs; this script formalizes that workflow for packaging. [\[Update wit...taller DMG | OneNote\]](https://bankershealthcare-my.sharepoint.com/personal/mmitchum_bhg-inc_com/_layouts/15/Doc.aspx?action=edit&mobileredirect=true&wdorigin=Sharepoint&DefaultItemOpen=1&sourcedoc={18983246-8917-477f-857f-1508983ef30c}&wd=target(/Jamf/macOS update.one/)&wdpartid={307ef9c0-a24c-ec4d-86a0-f72805620914}{1}&wdsectionfileid={3cab099e-fdee-4e27-a8bc-9705a1f02305})
-
 ***
 
 ## Script: `dmg_to_pkg.sh`
